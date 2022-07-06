@@ -6,6 +6,7 @@ import {
   Logo,
   Title,
   Input,
+  InputDesc,
   CenterView,
   Button,
   ButtonText,
@@ -16,7 +17,7 @@ import Books from "./Books";
 
 export default function App() {
   const [nome, setNome] = useState("");
-  const [preco, setPreco] = useState("");
+  const [desc, setDesc] = useState("");
   const [idEdit, setIdEdit] = useState(null);
   const [books, setBooks] = useState([]);
   const [disabledBtn, setDisabledBtn] = useState(false);
@@ -25,7 +26,6 @@ export default function App() {
     loadBooks = async () => {
       const realm = await getRealm();
       const data = realm.objects("Book");
-      console.log("Teste");
       setBooks(data);
     };
     loadBooks();
@@ -42,7 +42,7 @@ export default function App() {
     const dadosLivro = {
       id: id,
       nome: data.nome,
-      preco: data.preco,
+      desc: data.desc,
     };
 
     realm.write(() => {
@@ -51,16 +51,16 @@ export default function App() {
   };
 
   addBook = async () => {
-    if (nome === "" || preco === "") {
+    if (nome === "" || desc === "") {
       alert("Preencha Todos os Campos");
       return;
     }
     try {
-      const data = { nome: nome, preco: preco };
+      const data = { nome: nome, desc: desc };
       await saveBook(data);
 
       setNome("");
-      setPreco("");
+      setDesc("");
       Keyboard.dismiss();
     } catch (err) {
       alert(err);
@@ -69,7 +69,7 @@ export default function App() {
 
   function editarBook(data) {
     setNome(data.nome);
-    setPreco(data.preco);
+    setDesc(data.desc);
     setIdEdit(data.id);
     setDisabledBtn(true);
   }
@@ -85,7 +85,7 @@ export default function App() {
     const response = {
       id: idEdit,
       nome: nome,
-      preco: preco,
+      desc: desc,
     };
     await realm.write(() => {
       realm.create("Book", response, "modified");
@@ -94,7 +94,7 @@ export default function App() {
     const dadosAlterados = await realm.objects("Book").sorted("id", false);
     setBooks(dadosAlterados);
     setNome("");
-    setPreco("");
+    setDesc("");
     setIdEdit(null);
     setDisabledBtn(false);
     Keyboard.dismiss();
@@ -116,7 +116,7 @@ export default function App() {
 
   return (
     <Container>
-      <Logo>Proximos Livros</Logo>
+      <Logo>TAREFAS</Logo>
 
       <Title>Nome</Title>
       <Input
@@ -126,24 +126,24 @@ export default function App() {
         onChangeText={(text) => setNome(text)}
       />
 
-      <Title>Preço</Title>
-      <Input
+      <Title>Descrição</Title>
+      <InputDesc
         autoCapitalize="none"
         autoCorrect={false}
-        value={preco}
-        onChangeText={(text) => setPreco(text)}
+        value={desc}
+        onChangeText={(text) => setDesc(text)}
       />
 
       <CenterView>
+        <Button onPress={editBook}>
+          <ButtonText>Editar</ButtonText>
+        </Button>
         <Button
           onPress={addBook}
           disabled={disabledBtn}
           style={{ opacity: disabledBtn ? 0.1 : 1 }}
         >
           <ButtonText>Cadastrar</ButtonText>
-        </Button>
-        <Button onPress={editBook}>
-          <ButtonText>Editar</ButtonText>
         </Button>
       </CenterView>
 

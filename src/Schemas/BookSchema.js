@@ -5,7 +5,7 @@ export default class BookSchema {
     properties: {
       id: { type: "int", indexed: true },
       nome: "string",
-      preco: "string",
+      desc: "string",
     },
   };
 }

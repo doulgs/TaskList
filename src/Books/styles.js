@@ -11,7 +11,7 @@ export const Nome = styled.Text`
   font-weight: bold;
   color: #000;
 `;
-export const Preco = styled.Text`
+export const Desc = styled.Text`
   font-size: 17px;
   font-style: italic;
 `;

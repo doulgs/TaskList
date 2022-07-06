@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import { Container, Nome, Preco, CenterView, Botao, BotaoText } from "./styles";
+import { Container, Nome, Desc, CenterView, Botao, BotaoText } from "./styles";
 
 export default function Books({ data, editar, excluir }) {
   return (
     <Container>
       <Nome>{data.nome}</Nome>
-      <Preco>R$ {data.preco}</Preco>
+      <Desc>{data.desc}</Desc>
 
       <CenterView>
         <Botao onPress={() => editar(data)}>

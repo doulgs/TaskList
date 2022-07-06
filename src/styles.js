@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 
 export const Container = styled.View`
   flex: 1;
-  background-color: #373737;
+  background-color: #121212;
   padding-top: 45px;
 `;
 
@@ -11,6 +11,8 @@ export const Logo = styled.Text`
   text-align: center;
   color: #fff;
   font-weight: bold;
+  font-style: italic;
+  font-family: fantasy;
 `;
 export const Title = styled.Text`
   font-size: 22px;
@@ -21,6 +23,17 @@ export const Title = styled.Text`
 `;
 export const Input = styled.TextInput`
   height: 40px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 7px;
+  background-color: #fff;
+  border-width: 2px;
+  border-color: blueviolet;
+`;
+export const InputDesc = styled.TextInput`
+  height: 100px;
   margin-left: 15px;
   margin-right: 15px;
   margin-bottom: 10px;
